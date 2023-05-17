@@ -11,7 +11,7 @@ function App() {
     <>
       <Header setItems={setItems} />
       <Categories categories={items.categories} />
-      <Items items={items} />
+      <Items items={items.items} />
     </>
   );
 }
