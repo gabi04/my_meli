@@ -1,12 +1,14 @@
 const express = require("express");
 
-const router = express.Router();
+const ItemsService = require("./../services/items.service");
 
-router.get("/", (req, res) => {
-  res.json({
-    name: "item 1",
-    price: 1000,
-  });
+const router = express.Router();
+const service = new ItemsService();
+
+router.get("/", async (req, res) => {
+  const { q: query } = req.query;
+  const items = await service.getByQuery(query);
+  res.json(items);
 });
 
 module.exports = router;
