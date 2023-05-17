@@ -34,6 +34,7 @@ class ItemsService {
         this.items = [...itemsAux];
         const category = json.filters.filter((el) => el.id === "category");
         // TODO destructurar esto previendo errores
+        // TODO terminar este endpoint
         const categoiresAux = category[0].values[0].path_from_root.map(
           (el) => el.name
         );
