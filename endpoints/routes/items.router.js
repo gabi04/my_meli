@@ -7,7 +7,7 @@ const service = new ItemsService();
 
 router.get("/", async (req, res) => {
   const { q: query } = req.query;
-  const items = await service.getByQuery(query);
+  const items = await service.getItemsByQuery(query);
   res.json(items);
 });
 
