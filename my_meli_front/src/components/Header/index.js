@@ -2,9 +2,23 @@ import { useState } from "react";
 import Logo_ML from "../../Assets/Logo_ML.png";
 import ic_Search from "../../Assets/ic_Search.png";
 import "./Header.sass";
+import axios from "axios";
 
-const Header = () => {
-  const [query, setQuery] = useState();
+const Header = ({ setItems }) => {
+  const [query, setQuery] = useState("");
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const url = `http://localhost:3001/api/items?q=${query}`;
+    axios
+      .get(url)
+      .then((response) => {
+        setItems(response.data);
+      })
+      .catch(function (error) {
+        console.error("getSports error => ", error);
+      });
+  };
 
   return (
     <header className="header">
@@ -18,7 +32,7 @@ const Header = () => {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Nunca dejes de buscar"
           />
-          <button className="header__form__submit">
+          <button className="header__form__submit" onClick={handleSearchSubmit}>
             <img src={ic_Search} alt="icon_search" />
           </button>
         </form>
