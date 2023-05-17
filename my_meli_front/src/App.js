@@ -6,7 +6,6 @@ import Categories from "./components/Categories";
 
 function App() {
   const [items, setItems] = useState([]);
-  console.log(items);
   return (
     <>
       <Header setItems={setItems} />

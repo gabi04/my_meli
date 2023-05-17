@@ -16,7 +16,7 @@ const Header = ({ setItems }) => {
         setItems(response.data);
       })
       .catch(function (error) {
-        console.error("getSports error => ", error);
+        console.error("handleSearchSubmit error => ", error);
       });
   };
 
