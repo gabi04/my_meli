@@ -1,17 +1,18 @@
 import { useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
-import Items from "./components/Items";
 import Categories from "./components/Categories";
+import Scenes, { scenes } from "./scenes";
 
 function App() {
-  const [items, setItems] = useState([]);
-  console.log(items);
+  const [products, setProducts] = useState([]);
+  const [scene, setScene] = useState(scenes.PRODUCTS);
+
   return (
     <>
-      <Header setItems={setItems} />
-      <Categories categories={items.categories} />
-      <Items items={items} />
+      <Header setProducts={setProducts} setScene={setScene} />
+      <Categories categories={products.categories} />
+      <Scenes scene={scene} setScene={setScene} products={products.items} />
     </>
   );
 }

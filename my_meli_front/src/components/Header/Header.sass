@@ -1,14 +1,17 @@
 $yellow: #ffe600
 $light-grey: #eee
+$dark-grey: #333
+$scenes_width: 80%
 
 .header 
     padding: 8px
-    background-color: $yellow
+    background-color: #ffe600
+    width: 100vw
     .header__container
         display: flex
         justify-content: center
         align-items: center
-        width: 80%  
+        width: $scenes_width  
         margin: auto
     .header__logo
         margin-right: 32px
@@ -23,6 +26,7 @@ $light-grey: #eee
         border-bottom-left-radius: 4px
         padding: 0 16px
         font-size: 18px
+        color: $dark-grey
     .header__form__input:focus-visible
         outline: none
     .header__form__submit
