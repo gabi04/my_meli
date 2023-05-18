@@ -2,20 +2,25 @@ import { useParams } from "react-router-dom";
 import "./ProductDetail.sass";
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
+import Loader from "../../components/Loader";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [productDetail, setProductDetail] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const getProductDetail = useCallback(() => {
     const url = `http://localhost:3001/api/items/${id}`;
+    setLoading(true);
     axios
       .get(url)
       .then((response) => {
         setProductDetail(response.data.item);
+        setLoading(false);
       })
       .catch(function (error) {
         console.error("getProductDetail error => ", error);
+        setLoading(false);
       });
   }, [id]);
 
@@ -23,7 +28,9 @@ const ProductDetail = () => {
     getProductDetail();
   }, [getProductDetail]);
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <>
       {/* <Categories categories={products?.categories} /> */}
       <section className="produc-detail">

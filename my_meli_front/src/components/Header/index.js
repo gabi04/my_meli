@@ -2,13 +2,19 @@ import { useState } from "react";
 import Logo_ML from "../../Assets/Logo_ML.png";
 import ic_Search from "../../Assets/ic_Search.png";
 import "./Header.sass";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 
 const Header = () => {
   const [searchParams] = useSearchParams();
   const queryParam = searchParams.get("search");
   const [query, setQuery] = useState(queryParam || "");
+  const navigate = useNavigate();
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/items?search=${query}`);
+  };
 
   return (
     <header className="header">
@@ -18,7 +24,7 @@ const Header = () => {
           alt="Logo de mercado libre"
           className="header__logo"
         />
-        <form className="header__form">
+        <form className="header__form" onSubmit={handleSearchSubmit}>
           <input
             className="header__form__input"
             type="text"
