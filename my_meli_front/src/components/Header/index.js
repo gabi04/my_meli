@@ -2,25 +2,13 @@ import { useState } from "react";
 import Logo_ML from "../../Assets/Logo_ML.png";
 import ic_Search from "../../Assets/ic_Search.png";
 import "./Header.sass";
-import axios from "axios";
-import { scenes } from "../../scenes";
+import { Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
-const Header = ({ setProducts, setScene }) => {
-  const [query, setQuery] = useState("");
-
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    const url = `http://localhost:3001/api/items?q=${query}`;
-    axios
-      .get(url)
-      .then((response) => {
-        setScene(scenes.PRODUCTS);
-        setProducts(response.data);
-      })
-      .catch(function (error) {
-        console.error("handleSearchSubmit error => ", error);
-      });
-  };
+const Header = () => {
+  const [searchParams] = useSearchParams();
+  const queryParam = searchParams.get("search");
+  const [query, setQuery] = useState(queryParam || "");
 
   return (
     <header className="header">
@@ -38,9 +26,9 @@ const Header = ({ setProducts, setScene }) => {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Nunca dejes de buscar"
           />
-          <button className="header__form__submit" onClick={handleSearchSubmit}>
+          <Link className="header__form__submit" to={`/items?search=${query}`}>
             <img src={ic_Search} alt="lupa" />
-          </button>
+          </Link>
         </form>
       </div>
     </header>
