@@ -5,13 +5,13 @@ import Categories from "./components/Categories";
 import Scenes from "./scenes";
 
 function App() {
-  const [items, setItems] = useState([]);
+  const [products, setProducts] = useState([]);
 
   return (
     <>
-      <Header setItems={setItems} />
-      <Categories categories={items.categories} />
-      <Scenes items={items.items} />
+      <Header setProducts={setProducts} />
+      <Categories categories={products.categories} />
+      <Scenes products={products.items} />
     </>
   );
 }

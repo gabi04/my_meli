@@ -1,10 +1,10 @@
 import "./Items.sass";
 import Item from "./Item";
 
-const Items = ({ items, onProductClick }) => {
+const Items = ({ products, onProductClick }) => {
   return (
     <section className="items">
-      {items?.map((item, i) => (
+      {products?.map((item, i) => (
         <div
           key={`${item.title}-item-${i}`}
           onClick={() => onProductClick(item.id)}

@@ -8,7 +8,7 @@ const scenes = {
   PRODUCT_DETAIL: "PRODUCT_DETAIL",
 };
 
-const Scenes = ({ items }) => {
+const Scenes = ({ products }) => {
   const [scene, setScene] = useState(scenes.ITEMS);
   const [productDetails, setProductDetails] = useState({});
 
@@ -28,7 +28,7 @@ const Scenes = ({ items }) => {
 
   switch (scene) {
     case scenes.ITEMS:
-      return <Items items={items} onProductClick={getProductDetails} />;
+      return <Items products={products} onProductClick={getProductDetails} />;
     case scenes.PRODUCT_DETAIL:
       return <ProductDetail productDetails={productDetails} />;
     default:

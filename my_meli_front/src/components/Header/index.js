@@ -4,7 +4,7 @@ import ic_Search from "../../Assets/ic_Search.png";
 import "./Header.sass";
 import axios from "axios";
 
-const Header = ({ setItems }) => {
+const Header = ({ setProducts }) => {
   const [query, setQuery] = useState("");
 
   const handleSearchSubmit = (e) => {
@@ -13,7 +13,7 @@ const Header = ({ setItems }) => {
     axios
       .get(url)
       .then((response) => {
-        setItems(response.data);
+        setProducts(response.data);
       })
       .catch(function (error) {
         console.error("handleSearchSubmit error => ", error);
