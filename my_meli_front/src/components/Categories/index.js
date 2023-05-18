@@ -3,11 +3,11 @@ import "./Categories.sass";
 const Categories = ({ categories }) => (
   <section className="categories">
     <p className="categories__text">
-      {categories?.map((caregory, i) =>
+      {categories?.map((category, i) =>
         i + 1 < categories.length ? (
-          <span>{`${caregory} > `}</span>
+          <span key={`${category}-category-${i}`}>{`${category} > `}</span>
         ) : (
-          <b>{`${caregory}`}</b>
+          <b key={`${category}-category-${i}`}>{`${category}`}</b>
         )
       )}
     </p>
