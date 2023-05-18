@@ -1,36 +1,34 @@
 import { useState } from "react";
-import Items from "./Items";
+import Products from "./Products";
 import ProductDetail from "./ProductDetail";
 import axios from "axios";
 
-const scenes = {
-  ITEMS: "ITEMS",
+export const scenes = {
+  PRODUCTS: "PRODUCTS",
   PRODUCT_DETAIL: "PRODUCT_DETAIL",
 };
 
-const Scenes = ({ products }) => {
-  const [scene, setScene] = useState(scenes.ITEMS);
-  const [productDetails, setProductDetails] = useState({});
+const Scenes = ({ scene, setScene, products }) => {
+  const [productDetail, setProductDetail] = useState({});
 
-  const getProductDetails = (id) => {
+  const getProductDetail = (id) => {
     const url = `http://localhost:3001/api/items/${id}`;
     axios
       .get(url)
       .then((response) => {
-        console.log("response", response);
-        setProductDetails(response.data.item);
+        setProductDetail(response.data.item);
         setScene(scenes.PRODUCT_DETAIL);
       })
       .catch(function (error) {
-        console.error("getProductDetails error => ", error);
+        console.error("getProductDetail error => ", error);
       });
   };
 
   switch (scene) {
-    case scenes.ITEMS:
-      return <Items products={products} onProductClick={getProductDetails} />;
+    case scenes.PRODUCTS:
+      return <Products products={products} onProductClick={getProductDetail} />;
     case scenes.PRODUCT_DETAIL:
-      return <ProductDetail productDetails={productDetails} />;
+      return <ProductDetail productDetail={productDetail} />;
     default:
       return <></>;
   }
