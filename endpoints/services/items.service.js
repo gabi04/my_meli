@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-const getItemsByQuery = async (query) => {
+const getItems = async (query) => {
   const url = `https://api.mercadolibre.com/sites/MLA/search?q=${query}`;
 
   const options = {
@@ -90,6 +90,6 @@ const getItemDetail = async (id) => {
 };
 
 module.exports = {
-  getItemsByQuery,
+  getItems,
   getItemDetail,
 };
