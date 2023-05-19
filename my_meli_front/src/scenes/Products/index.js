@@ -3,10 +3,9 @@ import Product from "./Product";
 import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect, useCallback } from "react";
-import Categories from "../../components/Categories";
 import Loader from "../../components/Loader";
 
-const Products = () => {
+const Products = ({ setCategories }) => {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [searchParams] = useSearchParams();
@@ -18,7 +17,8 @@ const Products = () => {
     axios
       .get(url)
       .then((response) => {
-        setProducts(response.data);
+        setProducts(response.data.items);
+        setCategories(response.data.categories);
         setLoading(false);
       })
       .catch(function (error) {
@@ -34,21 +34,18 @@ const Products = () => {
   return loading ? (
     <Loader />
   ) : (
-    <>
-      <Categories categories={products?.categories} />
-      <section className="products">
-        {products?.items?.map((product, i) => (
-          <Link
-            className="product__card"
-            key={`${product.title}-product-${i}`}
-            to={`/items/${product.id}`}
-          >
-            <Product product={product} />
-            <hr className="products__hr" />
-          </Link>
-        ))}
-      </section>
-    </>
+    <section className="products">
+      {products.map((product, i) => (
+        <Link
+          className="product__card"
+          key={`${product.title}-product-${i}`}
+          to={`/items/${product.id}`}
+        >
+          <Product product={product} />
+          <hr className="products__hr" />
+        </Link>
+      ))}
+    </section>
   );
 };
 

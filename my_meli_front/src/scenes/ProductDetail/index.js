@@ -32,7 +32,6 @@ const ProductDetail = () => {
     <Loader />
   ) : (
     <>
-      {/* <Categories categories={products?.categories} /> */}
       <section className="produc-detail">
         <img
           className="produc-detail-image"
