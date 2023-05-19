@@ -13,17 +13,24 @@ const getItemsByQuery = async (query) => {
 
   const response = await fetch(url, options);
   const responseToJson = await response.json();
-  const items = responseToJson.results.map((item) => ({
-    id: item.id,
-    title: item.title,
-    price: {
-      currency: item.currency_id,
-      amount: item.price,
-    },
-    picture: item.thumbnail,
-    condition: item.condition,
-    free_shipping: item.shipping.free_shipping,
-  }));
+  const items = responseToJson.results.map((item) => {
+    const itemPriceSplited = item.price.toString().split(".");
+    const amount = parseInt(itemPriceSplited[0]);
+    const decimals = parseInt(itemPriceSplited.length === 2 ? [1] : 0);
+    return {
+      id: item.id,
+      title: item.title,
+      price: {
+        currency: item.currency_id,
+        amount,
+        decimals,
+      },
+      picture: item.thumbnail,
+      condition: item.condition,
+      free_shipping: item.shipping.free_shipping,
+      city: item.address.city_name,
+    };
+  });
   const category = responseToJson.filters.filter((el) => el.id === "category");
   const categoryFirst = category.length ? category[0] : {};
   const categories =
@@ -56,6 +63,9 @@ const getItemDetail = async (id) => {
   const itemDetail = await response.json();
   const responseDescription = await fetch(urlDescription, options);
   const itemDetailDescription = await responseDescription.json();
+  const itemPriceSplited = itemDetail.price.toString().split(".");
+  const amount = parseInt(itemPriceSplited[0]);
+  const decimals = parseInt(itemPriceSplited.length === 2 ? [1] : 0);
 
   return {
     author: {
@@ -67,8 +77,8 @@ const getItemDetail = async (id) => {
       title: itemDetail.title,
       price: {
         currency: itemDetail.currency_id,
-        amount: itemDetail.price,
-        decimals: 0,
+        amount,
+        decimals,
       },
       picture: itemDetail.pictures[0].url,
       condition: itemDetail.condition,

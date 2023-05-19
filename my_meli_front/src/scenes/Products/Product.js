@@ -19,7 +19,7 @@ const Product = ({ product }) => (
       )}
       <h1 className="product__title">{product.title}</h1>
     </div>
-    <h3 className="product__currency">{product.price.currency} </h3>
+    <h3 className="product__currency">{product.city} </h3>
   </div>
 );
 
