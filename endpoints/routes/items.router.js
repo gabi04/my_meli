@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
       ...itemsResponse,
     };
   }
-  if (endIndex < items.length) {
+  if (endIndex < items.items.length) {
     itemsResponse = {
       next: {
         page: page + 1,
